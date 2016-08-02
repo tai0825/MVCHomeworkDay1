@@ -1,2 +1,3 @@
-# MVCHomeworkDay1
-Create Project
+# MVCHomework
+
+Day1 Template的記帳本 使用 Child Action呈現，塞假資料，但不寫死在HTML。
