@@ -30,25 +30,39 @@ namespace Homework.Controllers
 
         public ActionResult Accounting()
         {
+            var accountData = GetAccountingData();
+            return View(accountData);
+        }
+
+        public ActionResult PartialView()
+        {
             return View();
         }
 
         [ChildActionOnly]
         public ActionResult ChildAction()
         {
-            var accountData = new List<AccountingModel>();
+            var accountData = GetAccountingData();
+
+            return View(accountData);
+        }
+
+        public List<AccountingModel> GetAccountingData()
+        {
+            var accountResult = new List<AccountingModel>();
 
             for (int i = 1; i < 5; i++)
             {
-                accountData.Add(new AccountingModel {
+                accountResult.Add(new AccountingModel
+                {
                     Id = i,
-                    Category = i % 2 == 0 ? "收入": "支出",
+                    Category = i % 2 == 0 ? "收入" : "支出",
                     Amount = i * 100,
                     Date = DateTime.Now.AddDays(i)
                 });
             }
 
-            return View(accountData);
+            return accountResult;
         }
     }
 }

@@ -237,6 +237,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Accounting.cshtml" />
     <Content Include="Views\Home\ChildAction.cshtml" />
+    <Content Include="Views\Home\_PartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
