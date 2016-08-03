@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -45,6 +46,13 @@ namespace Homework.Controllers
             var accountData = GetAccountingData();
 
             return View(accountData);
+        }
+
+        public ActionResult AjaxAction()
+        {
+            Thread.Sleep(1000);
+            ViewData.Model = GetAccountingData();
+            return View();
         }
 
         public List<AccountingModel> GetAccountingData()
