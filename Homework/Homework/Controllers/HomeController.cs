@@ -1,4 +1,5 @@
 ﻿using Homework.Models;
+using Homework.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Homework.Controllers
     public class HomeController : Controller
     {
         private readonly SkillTreeHomeworkEntities _db = new SkillTreeHomeworkEntities();
+        private readonly AccountBookService aServ = new AccountBookService();
 
         public ActionResult Index()
         {
@@ -33,7 +35,7 @@ namespace Homework.Controllers
 
         public ActionResult Accounting()
         {
-            var accountData = GetAccountingData();
+            var accountData = aServ.GetAccountingData();
             return View(accountData);
         }
 
@@ -45,7 +47,7 @@ namespace Homework.Controllers
         [ChildActionOnly]
         public ActionResult ChildAction()
         {
-            var accountData = GetAccountingData();
+            var accountData = aServ.GetAccountingData();
 
             return View(accountData);
         }
@@ -53,20 +55,10 @@ namespace Homework.Controllers
         public ActionResult AjaxAction()
         {
             Thread.Sleep(1000);
-            ViewData.Model = GetAccountingData();
+            ViewData.Model = aServ.GetAccountingData();
             return View();
         }
 
-        public List<AccountingModel> GetAccountingData()
-        {
-            var accountResult = _db.AccountBook.Select(a => new AccountingModel
-            {
-                Amount = a.Amounttt,
-                Category = a.Categoryyy == 0 ? "支出" : "收入",
-                Date = a.Dateee,
-            }).ToList();
-
-            return accountResult;
-        }
+        
     }
 }
