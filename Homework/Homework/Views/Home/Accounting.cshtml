@@ -47,23 +47,3 @@
 </div>
 
 @Html.Action("ChildAction")
-@Html.Partial("_PartialView")
-
-<div id="AjaxAction">
-</div>
-
-@Html.Hidden("ajaxUrl", Url.Action("AjaxAction"))
-@section scripts{
-    <script>
-        $(function () {
-            $.ajax({
-                type: "GET",
-                url: $("#ajaxUrl").val(),
-                dataType: "HTML",
-                success: function (response) {
-                    $("#AjaxAction").html(response);
-                }
-            });
-        });
-    </script>
-}

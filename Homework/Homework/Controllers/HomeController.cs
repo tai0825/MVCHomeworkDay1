@@ -10,6 +10,8 @@ namespace Homework.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly SkillTreeHomeworkEntities _db = new SkillTreeHomeworkEntities();
+
         public ActionResult Index()
         {
             return View();
@@ -57,18 +59,12 @@ namespace Homework.Controllers
 
         public List<AccountingModel> GetAccountingData()
         {
-            var accountResult = new List<AccountingModel>();
-
-            for (int i = 1; i < 5; i++)
+            var accountResult = _db.AccountBook.Select(a => new AccountingModel
             {
-                accountResult.Add(new AccountingModel
-                {
-                    Id = i,
-                    Category = i % 2 == 0 ? "收入" : "支出",
-                    Amount = i * 100,
-                    Date = DateTime.Now.AddDays(i)
-                });
-            }
+                Amount = a.Amounttt,
+                Category = a.Categoryyy == 0 ? "支出" : "收入",
+                Date = a.Dateee,
+            }).ToList();
 
             return accountResult;
         }
