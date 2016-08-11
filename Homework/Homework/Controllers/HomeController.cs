@@ -6,13 +6,19 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using Homework.Repositories;
 
 namespace Homework.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly SkillTreeHomeworkEntities _db = new SkillTreeHomeworkEntities();
-        private readonly AccountBookService aServ = new AccountBookService();
+        private readonly AccountBookService aServ;
+
+        public HomeController()
+        {
+            var unitOfWork = new EFUnitOfWork();
+            aServ = new AccountBookService(unitOfWork);
+        }
 
         public ActionResult Index()
         {

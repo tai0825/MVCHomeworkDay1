@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Homework.Models;
+using Homework.Repositories;
 
 namespace Homework.Service
 {
-    public class AccountBookService
+    public class AccountBookService : Repository<AccountBook>
     {
         private readonly SkillTreeHomeworkEntities _db = new SkillTreeHomeworkEntities();
+        private readonly IRepository<AccountBook> _accRepo;
+
+        public AccountBookService(IUnitOfWork unitOfWork): base(unitOfWork)
+        {
+            _accRepo = new Repository<AccountBook>(unitOfWork);
+        }
 
         public List<AccountingModel> GetAccountingData()
         {
