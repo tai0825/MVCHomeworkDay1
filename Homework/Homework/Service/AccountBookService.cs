@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Homework.Models;
 using Homework.Repositories;
+using System.Web.Mvc;
 
 namespace Homework.Service
 {
@@ -24,9 +25,30 @@ namespace Homework.Service
                 Amount = a.Amounttt,
                 Category = a.Categoryyy == 0 ? "支出" : "收入",
                 Date = a.Dateee
-            }).ToList();
+            }).Take(5).ToList();
 
             return accountResult;
+        }
+
+        public List<SelectListItem> GetCategoryDropDown()
+        {
+            var result = new List<SelectListItem>
+            {
+                new SelectListItem
+                {
+                    Text = "支出",
+                    Value = "0",
+                    Selected = false,
+                },
+                new SelectListItem
+                {
+                    Text = "收入",
+                    Value = "1",
+                    Selected = false,
+                }
+            };
+
+            return result;
         }
     }
 }

@@ -41,8 +41,9 @@ namespace Homework.Controllers
 
         public ActionResult Accounting()
         {
-            var accountData = aServ.GetAccountingData();
-            return View(accountData);
+            ViewData["dropDownList"] = aServ.GetCategoryDropDown();
+            
+            return View();
         }
 
         public ActionResult PartialView()
@@ -64,7 +65,5 @@ namespace Homework.Controllers
             ViewData.Model = aServ.GetAccountingData();
             return View();
         }
-
-        
     }
 }
