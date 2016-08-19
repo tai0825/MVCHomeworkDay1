@@ -46,6 +46,23 @@ namespace Homework.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Accounting([Bind(Include = "Category, Date, Amount, Remark")]AccountingModel data)
+        {
+            var temp = new AccountBook
+            {
+                Categoryyy = data.Category == "0" ? 0 : 1,
+                Amounttt = data.Amount,
+                Dateee = data.Date,
+                Remarkkk = data.Remark
+            };
+
+            aServ.Create(temp);
+            aServ.Commit();
+
+            return RedirectToAction("Accounting","Home");
+        }
+
         public ActionResult PartialView()
         {
             return View();

@@ -25,7 +25,7 @@ namespace Homework.Service
                 Amount = a.Amounttt,
                 Category = a.Categoryyy == 0 ? "支出" : "收入",
                 Date = a.Dateee
-            }).Take(5).ToList();
+            }).OrderByDescending(a => a.Date).Take(5).ToList();
 
             return accountResult;
         }
@@ -50,5 +50,10 @@ namespace Homework.Service
 
             return result;
         }
+
+        //public void Creat(AccountBook data)
+        //{
+
+        //}
     }
 }
