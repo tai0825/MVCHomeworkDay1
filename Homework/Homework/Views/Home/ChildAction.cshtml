@@ -20,7 +20,20 @@ ChildAction
                 var item = Model[i];
                 <tr>
                     <td>@(i+1)</td>
-                    <td>@item.Category</td>
+                    <td>
+                        @if (item.Category == "支出")
+                        {
+                            <span style="color:red">
+                                @item.Category
+                            </span>
+                        }
+                        else
+                        {
+                            <span style="color:blue">
+                                @item.Category
+                            </span>
+                        }
+                    </td>
                     <td>@item.Date.ToString("yyyy/MM/dd")</td>
                     <td>@item.Amount</td>
                 </tr>
