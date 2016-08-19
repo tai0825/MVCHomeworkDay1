@@ -47,18 +47,9 @@ namespace Homework.Controllers
         }
 
         [HttpPost]
-        public ActionResult Accounting([Bind(Include = "Category, Date, Amount, Remark")]AccountingModel data)
+        public ActionResult Accounting(AccountingModel data)
         {
-            var temp = new AccountBook
-            {
-                Categoryyy = data.Category == "0" ? 0 : 1,
-                Amounttt = data.Amount,
-                Dateee = data.Date,
-                Remarkkk = data.Remark
-            };
-
-            aServ.Create(temp);
-            aServ.Commit();
+            aServ.AddAccounting(data);
 
             return RedirectToAction("Accounting","Home");
         }
@@ -81,6 +72,13 @@ namespace Homework.Controllers
             Thread.Sleep(1000);
             ViewData.Model = aServ.GetAccountingData();
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult AjaxPost(AccountingModel data)
+        {
+            aServ.AddAccounting(data);
+            return PartialView("AjaxAction");
         }
     }
 }

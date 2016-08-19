@@ -51,9 +51,19 @@ namespace Homework.Service
             return result;
         }
 
-        //public void Creat(AccountBook data)
-        //{
+        public void AddAccounting(AccountingModel data)
+        {
+            var temp = new AccountBook
+            {
+                Id = Guid.NewGuid(),
+                Categoryyy = data.Category == "0" ? 0 : 1,
+                Amounttt = data.Amount,
+                Dateee = data.Date,
+                Remarkkk = data.Remark
+            };
 
-        //}
+            Create(temp);
+            Commit();
+        }
     }
 }
